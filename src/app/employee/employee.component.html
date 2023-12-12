@@ -1,0 +1,48 @@
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.Tel }}</td>
+        <td>
+          <button (click)="selectEmployee(employee)">Edit</button>
+          <button (click)="deleteEmployee(employee.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="selectedEmployee || isNewEmployee">
+    <h2>{{ isNewEmployee ? 'Add Employee' : 'Edit Employee' }}</h2>
+    <form #employeeForm="ngForm" (ngSubmit)="saveEmployee(selectedEmployee)">
+        <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="selectedEmployee.name" required>
+      </div>
+     <div>
+        <label for="position">email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="selectedEmployee.email" required>
+      </div>
+      <div>
+        <label for="department">Tel:</label>
+       <input type="text" id="Tel" name="Tel" [(ngModel)]="selectedEmployee.Tel" required>
+      </div>
+      <div>
+        <button type="submit">{{ isNewEmployee ? 'Add' : 'Update' }}</button>
+        <button type="reset">Cancel</button>
+      </div>
+    </form>
+  </div>
+  
+  <button (click)="addEmployee()">Add Employee</button>
+  
